@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-	"start": "node index.js",
-	"build": "webpack"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
