@@ -13,11 +13,19 @@ const userSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: "",
+    default: '',
+  },
+  dateOfBirth: {
+    type: Date,
+    default: null,
+  },
+  gender: {
+    type: String,
+    default: '',
   },
   idProfilImage: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 

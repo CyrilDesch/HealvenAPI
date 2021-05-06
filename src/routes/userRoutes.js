@@ -6,7 +6,7 @@ const gfs = require('../index');
 const router = express.Router();
 
 router.post('/modifyUser', async (req, res) => {
-  const { email, password, name, idProfilImage } = req.body;
+  const { email, password, name, dateOfBirth, gender, idProfilImage } = req.body;
   try {
     const user = await User.findByIdAndUpdate({ _id: req.user._id }, req.body);
     if(email || email != ""){
@@ -17,6 +17,12 @@ router.post('/modifyUser', async (req, res) => {
     }
     if(name || name != ""){
       user.name = name;
+    }
+    if(dateOfBirth){
+      user.dateOfBirth = dateOfBirth;
+    }
+    if(gender || gender != ""){
+      user.gender = gender;
     }
     if(idProfilImage || idProfilImage != ""){
       user.idProfilImage = idProfilImage;

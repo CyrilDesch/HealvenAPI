@@ -18,6 +18,7 @@ router.post('/signup', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET');
     const returnUser = user.toJSON();
     delete returnUser.password;
+    delete returnUser.__v;
     res.send({ token, returnUser });
   } catch (error) {
     return res.status(422).send(error.message);
