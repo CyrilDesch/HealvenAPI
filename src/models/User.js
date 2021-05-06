@@ -11,6 +11,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  name: {
+    type: String,
+    default: "",
+  },
+  urlPicture: {
+    type: String,
+    default: "",
+  },
 });
 
 userSchema.pre('save', function(next) {
