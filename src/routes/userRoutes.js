@@ -7,26 +7,27 @@ const router = express.Router();
 
 router.post('/modifyUser', async (req, res) => {
   const { email, password, name, dateOfBirth, gender, idProfilImage } = req.body;
+  const user = req.user;
+  if(email && email != ""){
+    user.email = email;
+  }
+  if(password && password != ""){
+    user.password = password;
+  }
+  if(name && name != ""){
+    user.name = name;
+  }
+  if(dateOfBirth){
+    user.dateOfBirth = dateOfBirth;
+  }
+  if(gender && gender != ""){
+    user.gender = gender;
+  }
+  if(idProfilImage && idProfilImage != ""){
+    user.idProfilImage = idProfilImage;
+  }
+
   try {
-    const user = await User.findByIdAndUpdate({ _id: req.user._id }, req.body);
-    if(email || email != ""){
-      user.email = email;
-    }
-    if(password || password != ""){
-      user.password = password;
-    }
-    if(name || name != ""){
-      user.name = name;
-    }
-    if(dateOfBirth){
-      user.dateOfBirth = dateOfBirth;
-    }
-    if(gender || gender != ""){
-      user.gender = gender;
-    }
-    if(idProfilImage || idProfilImage != ""){
-      user.idProfilImage = idProfilImage;
-    }
     await user.save();
     return res.status(200).json({ message: 'Succes' });
   } catch (error) {
