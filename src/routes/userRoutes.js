@@ -67,7 +67,7 @@ router.get('/image', async (req, res) => {
 router.post('/image', async (req, res) => {
   try {
     await upload(req, res);
-    console.log(req.data.file);
+    console.log(req);
     if (req.file == undefined) {
       return res.send(`You must select a file.`);
     }
