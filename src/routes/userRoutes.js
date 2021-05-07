@@ -40,7 +40,7 @@ router.get('/user', async (req, res) => {
     const returnUser = req.user.toJSON();
     delete returnUser.password;
     delete returnUser.__v;
-    return res.send(returnUser);
+    return res.send({returnUser});
   } catch (error) {
     return res.status(422).send(error.message);
   }
