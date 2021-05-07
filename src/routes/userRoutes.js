@@ -35,6 +35,17 @@ router.post('/modifyUser', async (req, res) => {
   }
 });
 
+router.get('/user', async (req, res) => {
+  try {
+    const returnUser = req.user.toJSON();
+    delete returnUser.password;
+    delete returnUser.__v;
+    return res.send(returnUser);
+  } catch (error) {
+    return res.status(422).send(error.message);
+  }
+});
+
 router.get('/image', async (req, res) => {
   try {
     const ObjectID = mongoose.Types.ObjectId;
