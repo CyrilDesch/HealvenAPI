@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function(next) {
   const user = this;
-  if(this.name != '' && this.dateOfBirth != null && this.gender != '' && this.idProfilImage != '')
+  if(this.name != '' && this.dateOfBirth != null && this.gender != '')
     this.valid = true;
   if (!user.isModified('password')) {
     return next();
