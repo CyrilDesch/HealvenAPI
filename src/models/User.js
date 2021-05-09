@@ -33,14 +33,10 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.post('save', (next) => {
-  if(this.name != '' && this.dateOfBirth != null && gender != '' && idProfilImage != '')
-    this.valid = true;
-    next();
-}); 
-
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function(next) {
   const user = this;
+  if(this.name != '' && this.dateOfBirth != null && this.gender != '' && this.idProfilImage != '')
+    this.valid = true;
   if (!user.isModified('password')) {
     return next();
   }
