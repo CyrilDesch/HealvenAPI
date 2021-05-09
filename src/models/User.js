@@ -27,9 +27,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  valid: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-userSchema.pre('save', function(next) {
+userSchema.post('save', (next) => {
+  if(this.name != '' && this.dateOfBirth != null && gender != '' && idProfilImage != '')
+    this.valid = true;
+    next();
+}); 
+
+userSchema.pre('save', (next) => {
   const user = this;
   if (!user.isModified('password')) {
     return next();
