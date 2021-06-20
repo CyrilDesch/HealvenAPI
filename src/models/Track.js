@@ -27,6 +27,9 @@ const trackSchema = new mongoose.Schema({
   time: {
     type: Date
   },
+  distance: {
+    type: Number
+  },
   locations: [pointSchema]
 });
 

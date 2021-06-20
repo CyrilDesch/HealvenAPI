@@ -15,14 +15,14 @@ router.get('/tracks', async(req, res) => {
 });
 
 router.post('/tracks', async(req, res) => {
-  const { locations, speedMoy, date, time} = req.body;
+  const { locations, speedMoy, date, time, distance} = req.body;
 
-  if (!speedMoy || !locations || !date || !time) {
+  if (!speedMoy || !locations || !date || !time || !distance) {
     return res.status(422).send({ error: 'Must provide all args' });
   }
   
   try {
-    const track = new Track({ speedMoy, locations, userId: req.user._id, date, time });
+    const track = new Track({ speedMoy, locations, userId: req.user._id, date, time, distance });
     await track.save();
     res.send(track);
   } catch (err) {
