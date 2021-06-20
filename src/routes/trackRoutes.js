@@ -15,14 +15,14 @@ router.get('/tracks', async(req, res) => {
 });
 
 router.post('/tracks', async(req, res) => {
-  const { locations, speedMoy } = req.body;
+  const { locations, speedMoy, date } = req.body;
 
-  if (!speedMoy || !locations) {
+  if (!speedMoy || !locations || !date) {
     return res.status(422).send({ error: 'Must provide speedMoy and locations' });
   }
   
   try {
-    const track = new Track({ speedMoy, locations, userId: req.user._id});
+    const track = new Track({ speedMoy, locations, userId: req.user._id, date });
     await track.save();
     res.send(track);
   } catch (err) {
