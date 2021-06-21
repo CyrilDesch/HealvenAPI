@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  poids: {
+    type: Number,
+    default: '',
+  },
   idProfilImage: {
     type: String,
     default: '',
