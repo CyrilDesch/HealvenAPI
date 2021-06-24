@@ -6,14 +6,14 @@ const User = mongoose.model('User');
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
+  const { pseudo, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(422).send({ error: 'Must provide email and password' });
+  if (!pseudo || !password) {
+    return res.status(422).send({ error: 'Must provide pseudo and password' });
   }
 
   try {
-    const user = new User({ email, password });
+    const user = new User({ pseudo, password });
     await user.save();
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET');
     const returnUser = user.toJSON();
@@ -26,15 +26,15 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/signin', async (req, res) => {
-  const { email, password } = req.body;
+  const { pseudo, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(422).send({ error: 'Must provide email and password' });
+  if (!pseudo || !password) {
+    return res.status(422).send({ error: 'Must provide pseudo and password' });
   }
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ pseudo });
   if (!user) {
-    return res.status(422).send({ error: 'Invalid password or email' });
+    return res.status(422).send({ error: 'Invalid password or pseudo' });
   }
 
   try {
@@ -44,7 +44,7 @@ router.post('/signin', async (req, res) => {
     delete returnUser.password;
     res.send({ token, returnUser });
   } catch (err) {
-    return res.status(422).send({ error: 'Invalid password or email' });
+    return res.status(422).send({ error: 'Invalid password or pseudo' });
   }
 });
 
